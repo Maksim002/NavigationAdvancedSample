@@ -80,6 +80,7 @@ interface ApiService {
     @POST("listNews?token=oYyxhIFgJjAb")
     fun listNews(@FieldMap params: Map<String, String>): Call<CommonResponse<ArrayList<ListNewsResultModel>>>
 
+
     @Headers("Content-Type: application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("getNews?token=oYyxhIFgJjAb")

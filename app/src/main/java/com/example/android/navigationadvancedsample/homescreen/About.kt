@@ -21,19 +21,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.navigationadvancedsample.R
-import com.timelysoft.tsjdomcom.service.Status
 import java.util.HashMap
 
-/**
- * Shows "About"
- */
 class About : Fragment() {
-
     private var viewModel = LoansViewModel()
     private var position = 0
 
@@ -50,20 +44,27 @@ class About : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         iniRecyclerView(view)
 
-        viewModel.error.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        })
+
+//        viewModel.error.observe(viewLifecycleOwner, Observer {
+//            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+//        })
+    }
+
+    init {
+        val map = HashMap<String, String>()
+        map.put("login", "143382")
+        map.put("token", "d67d8ab4f4c10bf22aa353e27879133c")
+
+        if (viewModel.listNewDta.value == null)
+            viewModel.listNews(map)
     }
 
     private fun iniRecyclerView(view: View) {
         viewModel.listNewDta.observe(viewLifecycleOwner, Observer { result ->
             view.findViewById<TextView>(R.id.data_text).text = result.result[position].description
-            if (result.code == 400){
-                println()
-            }
+
         })
     }
-
 }
 
 
